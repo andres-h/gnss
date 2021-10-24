@@ -39,12 +39,12 @@ class Channel {
 
 		~Channel();
 
-		void put(Seiscomp::Core::Time t, T value);
+		void put(Core::Time t, T value);
 	
 	private:
 		const std::string _stationId;
 		MSRecord* _msr;
-		Seiscomp::Core::Time _time;
+		Core::Time _time;
 		std::vector<T> _data;
 
 		void send(const char *record, size_t len);

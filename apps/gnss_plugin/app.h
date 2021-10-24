@@ -24,7 +24,7 @@ namespace Applications {
 namespace GNSSPlugin {
 
 
-class Application : public Seiscomp::Client::Application {
+class Application : public Client::Application {
 	public:
 		Application(int argc, char** argv);
 

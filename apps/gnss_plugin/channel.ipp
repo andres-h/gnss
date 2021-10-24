@@ -75,7 +75,7 @@ bool Channel<T>::flush(bool force) {
 
 
 template<typename T>
-void Channel<T>::put(Seiscomp::Core::Time t, T value) {
+void Channel<T>::put(Core::Time t, T value) {
 	if ( _data.size() > 0 && t != _time + Core::TimeSpan(double(_data.size()) / _msr->samprate) )
 		flush(true);
 

@@ -1,0 +1,6 @@
+INSTALL(
+	DIRECTORY .
+	DESTINATION ${SC3_PACKAGE_SHARE_DIR}/templates/seedlink
+	PATTERN "CMakeLists.txt" EXCLUDE
+)
+

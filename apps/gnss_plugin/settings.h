@@ -23,17 +23,34 @@ namespace GNSSPlugin {
 
 // Define default configuration
 struct Settings : System::Application::AbstractSettings {
-	Settings(): udpport(9999) {
-	}
+	struct Plugins {
+		struct GNSS {
+			GNSS(): udpport(9999), stationsFrom("stations.txt") {}
 
-	int udpport;
+			int udpport;
+			std::string stationsFrom;
+
+			virtual void accept(System::Application::SettingsLinker &linker) {
+				linker
+				& cfg(udpport, "udpport")
+				& cfgAsPath(stationsFrom, "stationsFrom");
+			}
+		} gnss;
+
+		virtual void accept(System::Application::SettingsLinker &linker) {
+			linker
+			& cfg(gnss, "gnss");
+		}
+	} plugins;
 
 	virtual void accept(System::Application::SettingsLinker &linker) {
 		linker
-		& cfg(udpport, "udpport")
-		& cli(udpport, "Server", "udpport",
+		& cli(plugins.gnss.udpport, "Plugin", "udpport",
 		      "UDP port for receiving GNSS data packets",
-		      true);
+		      true)
+		& cli(plugins.gnss.stationsFrom, "Plugin", "stations-from",
+		      "Location of station list file")
+		& cfg(plugins, "plugins");
 	}
 };
 

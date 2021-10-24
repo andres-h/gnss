@@ -89,11 +89,11 @@ void UDPClient::addStation(const string &key,
 void UDPClient::run() {
 	_socket.open(udp::v6());
 	_socket.set_option(boost::asio::ip::v6_only(false));
-	_socket.bind(udp::endpoint(udp::v6(), global.udpport));
+	_socket.bind(udp::endpoint(udp::v6(), global.plugins.gnss.udpport));
 
 	wait();
 
-	SEISCOMP_DEBUG("Startng I/O service");
+	SEISCOMP_DEBUG("Starting I/O service");
 	_ioService.run();
 	SEISCOMP_DEBUG("I/O service finished");
 }

@@ -10,6 +10,8 @@
  * https://www.gnu.org/licenses/agpl-3.0.html.                             *
  ***************************************************************************/
 
+#include <fstream>
+
 #define SEISCOMP_COMPONENT GNSS
 #include <seiscomp/logging/log.h>
 
@@ -31,8 +33,6 @@ Application::Application(int argc, char** argv)
 : Client::Application(argc, argv) {
 	setMessagingEnabled(false);
 	setDatabaseEnabled(false, false);
-	setLoadConfigModuleEnabled(false);
-	setLoadStationsEnabled(false);
 	bindSettings(&global);
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -45,9 +45,29 @@ bool Application::init() {
 	if ( !Client::Application::init() )
 		return false;
 
-	// read config here
-	_client.addStation("MRCO", "GE", "MARCO", 1.0);
-	_client.addStation("CAFE", "IV", "CAFE", 1.0);
+	ifstream ifs(global.plugins.gnss.stationsFrom);
+	if ( !ifs.is_open() ) {
+		SEISCOMP_ERROR("Cannot open %s", global.plugins.gnss.stationsFrom.c_str());
+		return false;
+	}
+
+	string key, networkCode, stationCode;
+	double sampleRate;
+
+	while ( ifs >> key >> networkCode >> stationCode >> sampleRate ) {
+		SEISCOMP_INFO("Adding station %s (%s.%s) @ %lf Hz",
+			      key.c_str(),
+			      networkCode.c_str(),
+			      stationCode.c_str(),
+			      sampleRate);
+
+		_client.addStation(key, networkCode, stationCode, sampleRate);
+	}
+
+	if ( !ifs.eof() ) {
+		SEISCOMP_ERROR("%s: invalid input", global.plugins.gnss.stationsFrom.c_str());
+		return false;
+	}
 
 	return true;
 }
@@ -80,6 +100,7 @@ void Application::done() {
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void Application::exit(int returnCode) {
 	Client::Application::exit(returnCode);
+	SEISCOMP_INFO("Stopping GNSS client");
 	_client.stop();
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
