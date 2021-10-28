@@ -35,7 +35,6 @@ class Station : public Core::BaseObject {
 		void parse(const std::string &msg);
 
 	private:
-		const std::string _id;
 		Channel<std::int32_t> _lbs;
 		Channel<std::int32_t> _lbo;
 		Channel<std::int32_t> _lbp;

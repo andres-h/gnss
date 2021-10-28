@@ -33,8 +33,7 @@ Station::Station(const std::string &networkCode,
 		 const std::string &stationCode,
 		 const std::string &locationCode,
 		 double sampleRate)
-: _id(networkCode + "." + stationCode)
-, _lbs(networkCode, stationCode, locationCode, "LBS", sampleRate)
+: _lbs(networkCode, stationCode, locationCode, "LBS", sampleRate)
 , _lbo(networkCode, stationCode, locationCode, "LBO", sampleRate)
 , _lbp(networkCode, stationCode, locationCode, "LBP", sampleRate)
 , _lbt(networkCode, stationCode, locationCode, "LBT", sampleRate)
@@ -81,7 +80,7 @@ void Station::parse(const string &msg) {
 	_lbo.put(tm, o);
 	_lbp.put(tm, p);
 	_lbt.put(tm, t);
-	_lbr.put(tm, r);
+	_lbr.put(tm, r*100);
 	_lbc.put(tm, c%100 + c/100%100 + c/10000%100 + c/1000000%100);
 	_lbe.put(tm, e);
 	_lbn.put(tm, n);
