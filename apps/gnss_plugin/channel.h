@@ -17,6 +17,7 @@
 #include <vector>
 #include <stdexcept>
 #include <system_error>
+#include <cstdint>
 #include <boost/type_traits/is_same.hpp>
 #include <seiscomp/core/datetime.h>
 #include <libmseed.h>

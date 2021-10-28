@@ -58,6 +58,11 @@
 					GNSS station code.
 				</description>
 			</parameter>
+			<parameter name="locationCode" type="string" default="">
+				<description>
+					Location code.
+				</description>
+			</parameter>
 			<parameter name="sampleRate" type="double" default="1.0" unit="Hz">
 				<description>
 					Sample rate in Hz.

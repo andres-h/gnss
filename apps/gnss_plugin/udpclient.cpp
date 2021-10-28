@@ -74,10 +74,12 @@ void UDPClient::handleReceive(const boost::system::error_code& error, size_t byt
 void UDPClient::addStation(const string &key,
 			const string &networkCode,
 			const string &stationCode,
+			const string &locationCode,
 			double sampleRate) {
 	_stations.insert(pair<string, StationPtr>(key,
 						  new Station(networkCode,
 							      stationCode,
+							      locationCode,
 							      sampleRate)));
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

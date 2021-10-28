@@ -31,6 +31,7 @@ class UDPClient {
 		void addStation(const std::string &key,
 				const std::string &networkCode,
 				const std::string &stationCode,
+				const std::string &locationCode,
 				double sampleRate);
 
 		void run();

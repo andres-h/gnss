@@ -27,7 +27,7 @@ Channel<T>::Channel(const std::string &networkCode,
 	_msr->byteorder = 1;
 	_msr->samprate = sampleRate;
 
-	if ( boost::is_same<T, int>::value ) {
+	if ( boost::is_same<T, std::int32_t>::value ) {
 		_msr->sampletype = 'i';
 		_msr->encoding = DE_STEIM2;
 	}

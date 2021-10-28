@@ -29,15 +29,28 @@ class Station : public Core::BaseObject {
 	public:
 		Station(const std::string &networkCode,
 			const std::string &stationCode,
-		       	double samprate);
+			const std::string &locationCode,
+			double sampleRate);
 
 		void parse(const std::string &msg);
 
 	private:
 		const std::string _id;
-		Channel<double> _lbx;
-		Channel<double> _lby;
+		Channel<std::int32_t> _lbs;
+		Channel<std::int32_t> _lbo;
+		Channel<std::int32_t> _lbp;
+		Channel<std::int32_t> _lbt;
+		Channel<std::int32_t> _lbr;
+		Channel<std::int32_t> _lbc;
+		Channel<double> _lbe;
+		Channel<double> _lbn;
 		Channel<double> _lbz;
+		Channel<double> _lb1;
+		Channel<double> _lb2;
+		Channel<double> _lb3;
+		Channel<double> _lb4;
+		Channel<double> _lb5;
+		Channel<double> _lb6;
 };
 
 

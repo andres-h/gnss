@@ -9,10 +9,15 @@ class SeedlinkPluginHandler:
         self.stations = {}
 
     def push(self, seedlink):
-        try: station = seedlink.param('sources.gnss.station')
-        except: station = seedlink.param('seedlink.station.code')
+        try: gnssStation = seedlink.param('sources.gnss.station')
+        except: gnssStation = seedlink.param('seedlink.station.code')
 
-        seedlink.setParam('sources.gnss.station', station);
+        seedlink.setParam('sources.gnss.station', gnssStation);
+
+        try: locationCode = seedlink.param('sources.gnss.locationCode')
+        except: locationCode = ""
+
+        seedlink.setParam('sources.gnss.locationCode', locationCode);
 
         try: sampleRate = float(seedlink.param('sources.gnss.sampleRate'))
         except: sampleRate = 1.0
@@ -41,9 +46,10 @@ class SeedlinkPluginHandler:
             stationList = []
             self.stations[stationsFrom] = stationList
 
-        stationList.append((station,
+        stationList.append((gnssStation,
                             seedlink.param('seedlink.station.network'),
                             seedlink.param('seedlink.station.code'),
+                            locationCode if locationCode else "--",
                             sampleRate))
 
         return udpport
@@ -53,5 +59,5 @@ class SeedlinkPluginHandler:
         for stationsFrom, stations in self.stations.items():
             with open(stationsFrom, "w") as fd:
                 for s in stations:
-                    fd.write("%s %s %s %f\n" % s)
+                    fd.write("%s %s %s %s %f\n" % s)
  

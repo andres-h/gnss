@@ -51,17 +51,21 @@ bool Application::init() {
 		return false;
 	}
 
-	string key, networkCode, stationCode;
+	string key, networkCode, stationCode, locationCode;
 	double sampleRate;
 
-	while ( ifs >> key >> networkCode >> stationCode >> sampleRate ) {
-		SEISCOMP_INFO("Adding station %s (%s.%s) @ %lf Hz",
+	while ( ifs >> key >> networkCode >> stationCode >> locationCode >> sampleRate ) {
+		SEISCOMP_INFO("Adding station %s (%s.%s.%s) @ %lf Hz",
 			      key.c_str(),
 			      networkCode.c_str(),
 			      stationCode.c_str(),
+			      locationCode.c_str(),
 			      sampleRate);
 
-		_client.addStation(key, networkCode, stationCode, sampleRate);
+		if ( locationCode == "--" )
+			locationCode = "";
+
+		_client.addStation(key, networkCode, stationCode, locationCode, sampleRate);
 	}
 
 	if ( !ifs.eof() ) {
