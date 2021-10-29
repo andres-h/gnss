@@ -56,12 +56,11 @@ Station::Station(const std::string &networkCode,
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void Station::parse(const string &msg) {
-	int yr, mo, dt, hh, mm, ss;
-	int s, o, p, t, c;
-	double r, e, n, z, ee, nn, zz, en, ez, nz;
+	int yr, mo, dt, hh, mm, s, o, p, t, c;
+	double ss, r, e, n, z, ee, nn, zz, en, ez, nz;
 
 	if ( sscanf(msg.c_str(),
-		    "> %*s %4d%2d%2d%2d%2d%2d %d %d %d %d %lf %d"
+		    "> %*s %4d%2d%2d%2d%2d%lf %d %d %d %d %lf %d"
 		    "%lf %lf %lf %lf %lf %lf %lf %lf %lf",
 		    &yr, &mo, &dt, &hh, &mm, &ss, &s, &o, &p, &t, &r, &c,
 		    &e, &n, &z, &ee, &nn, &zz, &en, &ez, &nz) != 21 ) {
@@ -69,10 +68,10 @@ void Station::parse(const string &msg) {
 		return;
 	}
 
-	Core::Time tm(yr, mo, dt, hh, mm, ss, 0);
+	Core::Time tm = Core::Time(yr, mo, dt, hh, mm) + Core::TimeSpan(ss);
 
-	if ( ! tm.valid() ) {
-		SEISCOMP_ERROR("Invalid time: %d%d%d%d%d%d", yr, mo, dt, hh, mm, ss);
+	if ( !tm.valid() ) {
+		SEISCOMP_ERROR("Invalid time: %d%d%d%d%d%lf", yr, mo, dt, hh, mm, ss);
 		return;
 	}
 
