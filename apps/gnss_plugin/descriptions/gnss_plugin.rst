@@ -1,5 +1,5 @@
-The GNSS plugin is a SeedLink plugin that converts GNSS messages to Mini-SEED
-channels according to the following table:
+The GNSS plugin is a SeedLink plugin that converts GDRT (GFZ Displacement
+Real-Time) UDP messages to Mini-SEED channels according to the following table:
 
 +-------+---------------------+----------------+---------------------------------------+-------------------+
 | Index | Field name          | Format         | Description                           | Mini-SEED channel |
