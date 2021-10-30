@@ -10,42 +10,37 @@
  * https://www.gnu.org/licenses/agpl-3.0.html.                             *
  ***************************************************************************/
 
-#ifndef SEISCOMP_APPS_GNSSPLUGIN_UDPCLIENT_H__
-#define SEISCOMP_APPS_GNSSPLUGIN_UDPCLIENT_H__
+#ifndef SEISCOMP_APPS_GDRT_APP_H__
+#define SEISCOMP_APPS_GDRT_APP_H__
 
-#include <string>
-#include <map>
-#include <boost/asio.hpp>
-#include <boost/array.hpp>
+#include <seiscomp/client/application.h>
 
-#include "station.h"
+#include "udpclient.h"
+#include "version.h"
 
 
 namespace Seiscomp {
 namespace Applications {
-namespace GNSSPlugin {
+namespace GDRT {
 
 
-class UDPClient {
+class Application : public Client::Application {
 	public:
-		void addStation(const std::string &key,
-				const std::string &networkCode,
-				const std::string &stationCode,
-				const std::string &locationCode,
-				double sampleRate);
+		Application(int argc, char** argv);
 
-		void run();
-		void stop();
+
+	protected:
+		bool init();
+		bool run();
+		void done();
+		void exit(int returnCode);
+
+		const char *version() {
+			return GDRT_VERSION_NAME;
+		}
 
 	private:
-		boost::asio::io_service _ioService;
-		boost::asio::ip::udp::socket _socket{_ioService};
-		boost::asio::ip::udp::endpoint _remoteEndpoint;
-		boost::array<char, 1024> _recvBuffer;
-		std::map<std::string, StationPtr> _stations;
-
-		void wait();
-		void handleReceive(const boost::system::error_code& error, size_t bytesTransferred);
+		UDPClient _client;
 };
 
 

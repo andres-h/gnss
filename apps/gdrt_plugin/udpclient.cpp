@@ -12,7 +12,7 @@
 
 #include <boost/bind.hpp>
 
-#define SEISCOMP_COMPONENT GNSS
+#define SEISCOMP_COMPONENT GDRT
 #include <seiscomp/logging/log.h>
 
 #include "udpclient.h"
@@ -25,7 +25,7 @@ using boost::asio::ip::udp;
 
 namespace Seiscomp {
 namespace Applications {
-namespace GNSSPlugin {
+namespace GDRT {
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -43,7 +43,8 @@ void UDPClient::wait() {
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-void UDPClient::handleReceive(const boost::system::error_code& error, size_t bytesTransferred) {
+void UDPClient::handleReceive(const boost::system::error_code& error,
+			      size_t bytesTransferred) {
 	if (error) {
 	    SEISCOMP_ERROR("Receive failed: %s", error.message().c_str());
 	    return;
@@ -72,10 +73,10 @@ void UDPClient::handleReceive(const boost::system::error_code& error, size_t byt
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void UDPClient::addStation(const string &key,
-			const string &networkCode,
-			const string &stationCode,
-			const string &locationCode,
-			double sampleRate) {
+			   const string &networkCode,
+			   const string &stationCode,
+			   const string &locationCode,
+			   double sampleRate) {
 	_stations.insert(pair<string, StationPtr>(key,
 						  new Station(networkCode,
 							      stationCode,
@@ -91,7 +92,7 @@ void UDPClient::addStation(const string &key,
 void UDPClient::run() {
 	_socket.open(udp::v6());
 	_socket.set_option(boost::asio::ip::v6_only(false));
-	_socket.bind(udp::endpoint(udp::v6(), global.plugins.gnss.udpport));
+	_socket.bind(udp::endpoint(udp::v6(), global.plugins.gdrt.udpport));
 
 	wait();
 

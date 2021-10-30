@@ -9,25 +9,25 @@ class SeedlinkPluginHandler:
         self.stations = {}
 
     def push(self, seedlink):
-        try: gnssStation = seedlink.param('sources.gnss.station')
-        except: gnssStation = seedlink.param('seedlink.station.code')
+        try: gdrtStation = seedlink.param('sources.gdrt.station')
+        except: gdrtStation = seedlink.param('seedlink.station.code')
 
-        seedlink.setParam('sources.gnss.station', gnssStation);
+        seedlink.setParam('sources.gdrt.station', gdrtStation);
 
-        try: locationCode = seedlink.param('sources.gnss.locationCode')
+        try: locationCode = seedlink.param('sources.gdrt.locationCode')
         except: locationCode = ""
 
-        seedlink.setParam('sources.gnss.locationCode', locationCode);
+        seedlink.setParam('sources.gdrt.locationCode', locationCode);
 
-        try: sampleRate = float(seedlink.param('sources.gnss.sampleRate'))
+        try: sampleRate = float(seedlink.param('sources.gdrt.sampleRate'))
         except: sampleRate = 1.0
 
-        seedlink.setParam('sources.gnss.sampleRate', sampleRate)
+        seedlink.setParam('sources.gdrt.sampleRate', sampleRate)
 
-        try: udpport = int(seedlink.param('sources.gnss.udpport'))
+        try: udpport = int(seedlink.param('sources.gdrt.udpport'))
         except: udpport = 9999
 
-        seedlink.setParam('sources.gnss.udpport', udpport);
+        seedlink.setParam('sources.gdrt.udpport', udpport);
 
         try:
             n = self.instances[udpport]
@@ -36,8 +36,8 @@ class SeedlinkPluginHandler:
             n = len(self.instances)
             self.instances[udpport] = n
 
-        stationsFrom = os.path.join(seedlink.config_dir, "gnss%d.stations" % n)
-        seedlink.setParam('sources.gnss.stationsFrom', stationsFrom)
+        stationsFrom = os.path.join(seedlink.config_dir, "gdrt%d.stations" % n)
+        seedlink.setParam('sources.gdrt.stationsFrom', stationsFrom)
 
         try:
             stationList = self.stations[stationsFrom]
@@ -46,7 +46,7 @@ class SeedlinkPluginHandler:
             stationList = []
             self.stations[stationsFrom] = stationList
 
-        stationList.append((gnssStation,
+        stationList.append((gdrtStation,
                             seedlink.param('seedlink.station.network'),
                             seedlink.param('seedlink.station.code'),
                             locationCode if locationCode else "--",

@@ -13,7 +13,7 @@
 #include "app.h"
 
 int main(int argc, char ** argv) {
-	Seiscomp::Applications::GNSSPlugin::Application app(argc, argv);
+	Seiscomp::Applications::GDRT::Application app(argc, argv);
 	return app();
 }
 

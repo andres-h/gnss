@@ -13,7 +13,7 @@
 #include <string>
 #include <cstdio>
 
-#define SEISCOMP_COMPONENT GNSS
+#define SEISCOMP_COMPONENT GDRT
 #include <seiscomp/logging/log.h>
 
 #include "station.h"
@@ -25,7 +25,7 @@ using namespace Seiscomp;
 
 namespace Seiscomp {
 namespace Applications {
-namespace GNSSPlugin {
+namespace GDRT {
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

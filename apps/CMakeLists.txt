@@ -1,1 +1,1 @@
-SUBDIRS(gnss_plugin)
+SUBDIRS(gdrt_plugin)

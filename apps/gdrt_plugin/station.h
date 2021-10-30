@@ -10,37 +10,46 @@
  * https://www.gnu.org/licenses/agpl-3.0.html.                             *
  ***************************************************************************/
 
-#ifndef SEISCOMP_APPS_GNSSPLUGIN_APP_H__
-#define SEISCOMP_APPS_GNSSPLUGIN_APP_H__
+#ifndef SEISCOMP_APPS_GDRT_STATION_H__
+#define SEISCOMP_APPS_GDRT_STATION_H__
 
-#include <seiscomp/client/application.h>
+#include <string>
+#include <seiscomp/core/baseobject.h>
 
-#include "udpclient.h"
-#include "version.h"
+#include "station.h"
+#include "channel.h"
 
 
 namespace Seiscomp {
 namespace Applications {
-namespace GNSSPlugin {
+namespace GDRT {
 
-
-class Application : public Client::Application {
+DEFINE_SMARTPOINTER(Station);
+class Station : public Core::BaseObject {
 	public:
-		Application(int argc, char** argv);
+		Station(const std::string &networkCode,
+			const std::string &stationCode,
+			const std::string &locationCode,
+			double sampleRate);
 
-
-	protected:
-		bool init();
-		bool run();
-		void done();
-		void exit(int returnCode);
-
-		const char *version() {
-			return GNSS_VERSION_NAME;
-		}
+		void parse(const std::string &msg);
 
 	private:
-		UDPClient _client;
+		Channel<std::int32_t> _lbs;
+		Channel<std::int32_t> _lbo;
+		Channel<std::int32_t> _lbp;
+		Channel<std::int32_t> _lbt;
+		Channel<std::int32_t> _lbr;
+		Channel<std::int32_t> _lbc;
+		Channel<double> _lbe;
+		Channel<double> _lbn;
+		Channel<double> _lbz;
+		Channel<double> _lb1;
+		Channel<double> _lb2;
+		Channel<double> _lb3;
+		Channel<double> _lb4;
+		Channel<double> _lb5;
+		Channel<double> _lb6;
 };
 
 

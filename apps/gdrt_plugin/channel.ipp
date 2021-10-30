@@ -12,19 +12,19 @@
 
 template<typename T>
 Channel<T>::Channel(const std::string &networkCode,
-		 const std::string &stationCode,
-		 const std::string &locationCode,
-		 const std::string &channelCode,
-		 double sampleRate)
+		    const std::string &stationCode,
+		    const std::string &locationCode,
+		    const std::string &channelCode,
+		    double sampleRate)
 : _stationId(networkCode + "." + stationCode) {
 	_msr = msr_init(NULL);
 	_msr->reclen = 512;
-	strncpy(_msr->network, networkCode.c_str(), 11);
-	strncpy(_msr->station, stationCode.c_str(), 11);
-	strncpy(_msr->channel, channelCode.c_str(), 11);
-	strncpy(_msr->location, locationCode.c_str(), 11);
 	_msr->dataquality = 'D';
 	_msr->byteorder = 1;
+	strncpy(_msr->network, networkCode.c_str(), 11);
+	strncpy(_msr->station, stationCode.c_str(), 11);
+	strncpy(_msr->location, locationCode.c_str(), 11);
+	strncpy(_msr->channel, channelCode.c_str(), 11);
 	_msr->samprate = sampleRate;
 
 	if ( boost::is_same<T, std::int32_t>::value ) {
@@ -93,5 +93,5 @@ void Channel<T>::send(const char *record, size_t len) {
 	if ( send_mseed(_stationId.c_str(), record, len) < 0 )
 		throw std::system_error(errno,
 					std::generic_category(),
-					"error sending data to Seedlink server");
+					"error sending data to SeedLink server");
 }

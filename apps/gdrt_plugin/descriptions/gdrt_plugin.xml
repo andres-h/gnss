@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <seiscomp>
-	<module name="gnss_plugin" category="Acquisition">
-		<description>SeedLink plugin for receiving GNSS packets</description>
+	<module name="gdrt_plugin" category="Acquisition">
+		<description>SeedLink plugin for receiving GDRT messages</description>
 		<command-line>
 			<group name="Generic">
 				<optionReference>generic#help</optionReference>
@@ -27,17 +27,17 @@
 			</group>
 
 			<group name="Plugin">
-				<option long-flag="udpport" argument="int" param-ref="plugins.gnss.udpport"/>
-				<option long-flag="stations-from" argument="string" param-ref="plugins.gnss.stationsFrom"/>
+				<option long-flag="udpport" argument="int" param-ref="plugins.gdrt.udpport"/>
+				<option long-flag="stations-from" argument="string" param-ref="plugins.gdrt.stationsFrom"/>
 			</group>
 		</command-line>
 
 		<configuration>
 			<group name="plugins">
-				<group name="gnss">
+				<group name="gdrt">
 					<parameter name="udpport" type="int" default="9999">
 						<description>
-							UDP port for receiving GNSS packets. By default port 9999 will be used.
+							UDP port for receiving GDRT messages. By default port 9999 will be used.
 						</description>
 					</parameter>
 					<parameter name="stationsFrom" type="string" default="stations.txt">
@@ -50,12 +50,12 @@
 		</configuration>
 	</module>
 
-	<binding module="seedlink" name="gnss" category="sources">
-		<description>Transfers GNSS data to SeedLink server</description>
+	<binding module="seedlink" name="gdrt" category="sources">
+		<description>Transfers GDRT data to SeedLink server</description>
 		<configuration>
 			<parameter name="station" type="string">
 				<description>
-					GNSS station code.
+					GDRT station code.
 				</description>
 			</parameter>
 			<parameter name="locationCode" type="string" default="">
@@ -70,7 +70,7 @@
 			</parameter>
 			<parameter name="udpport" type="int" default="9999">
 				<description>
-					UDP port for receiving GNSS packets. By default port 9999 will be used.
+					UDP port for receiving GDRT messages. By default port 9999 will be used.
 				</description>
 			</parameter>
 		</configuration>

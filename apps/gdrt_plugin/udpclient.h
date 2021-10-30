@@ -10,17 +10,49 @@
  * https://www.gnu.org/licenses/agpl-3.0.html.                             *
  ***************************************************************************/
 
-#include "settings.h"
+#ifndef SEISCOMP_APPS_GDRT_UDPCLIENT_H__
+#define SEISCOMP_APPS_GDRT_UDPCLIENT_H__
+
+#include <string>
+#include <map>
+#include <boost/asio.hpp>
+#include <boost/array.hpp>
+
+#include "station.h"
 
 
 namespace Seiscomp {
 namespace Applications {
-namespace GNSSPlugin {
+namespace GDRT {
 
 
-Settings global;
+class UDPClient {
+	public:
+		void addStation(const std::string &key,
+				const std::string &networkCode,
+				const std::string &stationCode,
+				const std::string &locationCode,
+				double sampleRate);
+
+		void run();
+		void stop();
+
+	private:
+		boost::asio::io_service _ioService;
+		boost::asio::ip::udp::socket _socket{_ioService};
+		boost::asio::ip::udp::endpoint _remoteEndpoint;
+		boost::array<char, 1024> _recvBuffer;
+		std::map<std::string, StationPtr> _stations;
+
+		void wait();
+		void handleReceive(const boost::system::error_code& error,
+				   size_t bytesTransferred);
+};
 
 
 }
 }
 }
+
+
+#endif

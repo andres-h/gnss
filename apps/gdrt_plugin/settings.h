@@ -10,22 +10,22 @@
  * https://www.gnu.org/licenses/agpl-3.0.html.                             *
  ***************************************************************************/
 
-#ifndef SEISCOMP_APPS_GNSSPLUGIN_SETTINGS_H__
-#define SEISCOMP_APPS_GNSSPLUGIN_SETTINGS_H__
+#ifndef SEISCOMP_APPS_GDRT_SETTINGS_H__
+#define SEISCOMP_APPS_GDRT_SETTINGS_H__
 
 #include <seiscomp/system/application.h>
 
 
 namespace Seiscomp {
 namespace Applications {
-namespace GNSSPlugin {
+namespace GDRT {
 
 
 // Define default configuration
 struct Settings : System::Application::AbstractSettings {
 	struct Plugins {
-		struct GNSS {
-			GNSS(): udpport(9999), stationsFrom("stations.txt") {}
+		struct GDRT {
+			GDRT(): udpport(9999), stationsFrom("stations.txt") {}
 
 			int udpport;
 			std::string stationsFrom;
@@ -35,20 +35,20 @@ struct Settings : System::Application::AbstractSettings {
 				& cfg(udpport, "udpport")
 				& cfgAsPath(stationsFrom, "stationsFrom");
 			}
-		} gnss;
+		} gdrt;
 
 		virtual void accept(System::Application::SettingsLinker &linker) {
 			linker
-			& cfg(gnss, "gnss");
+			& cfg(gdrt, "gdrt");
 		}
 	} plugins;
 
 	virtual void accept(System::Application::SettingsLinker &linker) {
 		linker
-		& cli(plugins.gnss.udpport, "Plugin", "udpport",
-		      "UDP port for receiving GNSS data packets",
+		& cli(plugins.gdrt.udpport, "Plugin", "udpport",
+		      "UDP port for receiving GDRT messages",
 		      true)
-		& cli(plugins.gnss.stationsFrom, "Plugin", "stations-from",
+		& cli(plugins.gdrt.stationsFrom, "Plugin", "stations-from",
 		      "Location of station list file")
 		& cfg(plugins, "plugins");
 	}

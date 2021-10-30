@@ -1,4 +1,4 @@
-The GNSS plugin is a SeedLink plugin that converts GDRT (GFZ Displacement
+The GDRT plugin is a SeedLink plugin that converts GDRT (GFZ Displacement
 Real-Time) UDP messages to Mini-SEED channels according to the following table:
 
 +-------+---------------------+----------------+---------------------------------------+-------------------+
@@ -6,7 +6,7 @@ Real-Time) UDP messages to Mini-SEED channels according to the following table:
 +=======+=====================+================+=======================================+===================+
 |   1   | Start of message    | character(1)   | A fixed character '>'                 |                   |
 +-------+---------------------+----------------+---------------------------------------+-------------------+
-|   2   | Station ID          | character(4)   | GNSS station ID                       |                   |
+|   2   | Station ID          | character(4)   | GDRT station ID                       |                   |
 +-------+---------------------+----------------+---------------------------------------+-------------------+
 |   3   | Epoch time          | integer(4)     | UTC time (year, month, day, hour,     |                   |
 |       |                     | integer(2)     | minute, second)                       |                   |

@@ -12,7 +12,7 @@
 
 #include <fstream>
 
-#define SEISCOMP_COMPONENT GNSS
+#define SEISCOMP_COMPONENT GDRT
 #include <seiscomp/logging/log.h>
 
 #include "app.h"
@@ -25,7 +25,7 @@ using namespace Seiscomp;
 
 namespace Seiscomp {
 namespace Applications {
-namespace GNSSPlugin {
+namespace GDRT {
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -45,9 +45,9 @@ bool Application::init() {
 	if ( !Client::Application::init() )
 		return false;
 
-	ifstream ifs(global.plugins.gnss.stationsFrom);
+	ifstream ifs(global.plugins.gdrt.stationsFrom);
 	if ( !ifs.is_open() ) {
-		SEISCOMP_ERROR("Cannot open %s", global.plugins.gnss.stationsFrom.c_str());
+		SEISCOMP_ERROR("Cannot open %s", global.plugins.gdrt.stationsFrom.c_str());
 		return false;
 	}
 
@@ -69,7 +69,7 @@ bool Application::init() {
 	}
 
 	if ( !ifs.eof() ) {
-		SEISCOMP_ERROR("%s: invalid input", global.plugins.gnss.stationsFrom.c_str());
+		SEISCOMP_ERROR("%s: invalid input", global.plugins.gdrt.stationsFrom.c_str());
 		return false;
 	}
 
@@ -82,7 +82,7 @@ bool Application::init() {
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool Application::run() {
-	SEISCOMP_INFO("Starting GNSS client");
+	SEISCOMP_INFO("Starting GDRT client");
 	_client.run();
 	return true;
 }
@@ -104,7 +104,7 @@ void Application::done() {
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void Application::exit(int returnCode) {
 	Client::Application::exit(returnCode);
-	SEISCOMP_INFO("Stopping GNSS client");
+	SEISCOMP_INFO("Stopping GDRT client");
 	_client.stop();
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

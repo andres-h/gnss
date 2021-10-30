@@ -10,8 +10,8 @@
  * https://www.gnu.org/licenses/agpl-3.0.html.                             *
  ***************************************************************************/
 
-#ifndef SEISCOMP_APPS_GNSSPLUGIN_CHANNEL_H__
-#define SEISCOMP_APPS_GNSSPLUGIN_CHANNEL_H__
+#ifndef SEISCOMP_APPS_GDRT_CHANNEL_H__
+#define SEISCOMP_APPS_GDRT_CHANNEL_H__
 
 #include <string>
 #include <vector>
@@ -26,7 +26,7 @@
 
 namespace Seiscomp {
 namespace Applications {
-namespace GNSSPlugin {
+namespace GDRT {
 
 
 template<typename T>

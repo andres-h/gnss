@@ -10,52 +10,17 @@
  * https://www.gnu.org/licenses/agpl-3.0.html.                             *
  ***************************************************************************/
 
-#ifndef SEISCOMP_APPS_GNSSPLUGIN_STATION_H__
-#define SEISCOMP_APPS_GNSSPLUGIN_STATION_H__
-
-#include <string>
-#include <seiscomp/core/baseobject.h>
-
-#include "station.h"
-#include "channel.h"
+#include "settings.h"
 
 
 namespace Seiscomp {
 namespace Applications {
-namespace GNSSPlugin {
+namespace GDRT {
 
-DEFINE_SMARTPOINTER(Station);
-class Station : public Core::BaseObject {
-	public:
-		Station(const std::string &networkCode,
-			const std::string &stationCode,
-			const std::string &locationCode,
-			double sampleRate);
 
-		void parse(const std::string &msg);
-
-	private:
-		Channel<std::int32_t> _lbs;
-		Channel<std::int32_t> _lbo;
-		Channel<std::int32_t> _lbp;
-		Channel<std::int32_t> _lbt;
-		Channel<std::int32_t> _lbr;
-		Channel<std::int32_t> _lbc;
-		Channel<double> _lbe;
-		Channel<double> _lbn;
-		Channel<double> _lbz;
-		Channel<double> _lb1;
-		Channel<double> _lb2;
-		Channel<double> _lb3;
-		Channel<double> _lb4;
-		Channel<double> _lb5;
-		Channel<double> _lb6;
-};
+Settings global;
 
 
 }
 }
 }
-
-
-#endif
