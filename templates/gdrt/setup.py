@@ -1,7 +1,7 @@
 import os
 
 '''
-Plugin handler for the GNSS plugin.
+Plugin handler for the GDRT plugin.
 '''
 class SeedlinkPluginHandler:
     def __init__(self):

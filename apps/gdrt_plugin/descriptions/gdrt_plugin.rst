@@ -62,16 +62,16 @@ Real-Time) UDP messages to Mini-SEED channels according to the following table:
 +-------+---------------------+----------------+                                       +-------------------+
 |  12   | Coordinate Z        | double(%14.4f) |                                       |     LBZ           |
 +-------+---------------------+----------------+---------------------------------------+-------------------+
-|  13   | Variance of         | double(%14.4f) | Variance of coordinates in meters     |     LB1           |
+|  13   | Variance of         | double(%14.4f) | Variance of coordinates (m²)          |     LB1           |
 |       | coordinate X        |                |                                       |                   |
 +-------+---------------------+----------------+                                       +-------------------+
 |  14   | Variance of         | double(%14.4f) |                                       |     LB2           |
-|       | coordinate y        |                |                                       |                   |
+|       | coordinate Y        |                |                                       |                   |
 +-------+---------------------+----------------+                                       +-------------------+
 |  15   | Variance of         | double(%14.4f) |                                       |     LB3           |
 |       | coordinate Z        |                |                                       |                   |
 +-------+---------------------+----------------+---------------------------------------+-------------------+
-|  16   | Covariance of       | double(%14.4f) | Covariance of coordinates in meters   |     LB4           |
+|  16   | Covariance of       | double(%14.4f) | Covariance of coordinates (m²)        |     LB4           |
 |       | coordinates X and Y |                |                                       |                   |
 +-------+---------------------+----------------+                                       +-------------------+
 |  17   | Covariance of       | double(%14.4f) |                                       |     LB5           |
