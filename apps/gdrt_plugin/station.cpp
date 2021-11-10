@@ -39,8 +39,8 @@ Station::Station(const std::string &networkCode,
 , _lbt(networkCode, stationCode, locationCode, "LBT", sampleRate)
 , _lbr(networkCode, stationCode, locationCode, "LBR", sampleRate)
 , _lbc(networkCode, stationCode, locationCode, "LBC", sampleRate)
-, _lbe(networkCode, stationCode, locationCode, "LBE", sampleRate)
-, _lbn(networkCode, stationCode, locationCode, "LBN", sampleRate)
+, _lbx(networkCode, stationCode, locationCode, "LBX", sampleRate)
+, _lby(networkCode, stationCode, locationCode, "LBY", sampleRate)
 , _lbz(networkCode, stationCode, locationCode, "LBZ", sampleRate)
 , _lb1(networkCode, stationCode, locationCode, "LB1", sampleRate)
 , _lb2(networkCode, stationCode, locationCode, "LB2", sampleRate)
@@ -57,13 +57,13 @@ Station::Station(const std::string &networkCode,
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void Station::parse(const string &msg) {
 	int yr, mo, dt, hh, mm, s, o, p, t, c;
-	double ss, r, e, n, z, ee, nn, zz, en, ez, nz;
+	double ss, r, x, y, z, xx, yy, zz, xy, xz, yz;
 
 	if ( sscanf(msg.c_str(),
 		    "> %*s %4d%2d%2d%2d%2d%lf %d %d %d %d %lf %d"
 		    "%lf %lf %lf %lf %lf %lf %lf %lf %lf",
 		    &yr, &mo, &dt, &hh, &mm, &ss, &s, &o, &p, &t, &r, &c,
-		    &e, &n, &z, &ee, &nn, &zz, &en, &ez, &nz) != 21 ) {
+		    &x, &y, &z, &xx, &yy, &zz, &xy, &xz, &yz) != 21 ) {
 		SEISCOMP_ERROR("Invalid message: %s", msg.c_str());
 		return;
 	}
@@ -81,15 +81,15 @@ void Station::parse(const string &msg) {
 	_lbt.put(tm, t);
 	_lbr.put(tm, r*100);
 	_lbc.put(tm, c%100 + c/100%100 + c/10000%100 + c/1000000%100);
-	_lbe.put(tm, e);
-	_lbn.put(tm, n);
+	_lbx.put(tm, x);
+	_lby.put(tm, y);
 	_lbz.put(tm, z);
-	_lb1.put(tm, ee);
-	_lb2.put(tm, nn);
+	_lb1.put(tm, xx);
+	_lb2.put(tm, yy);
 	_lb3.put(tm, zz);
-	_lb4.put(tm, en);
-	_lb5.put(tm, ez);
-	_lb6.put(tm, nz);
+	_lb4.put(tm, xy);
+	_lb5.put(tm, xz);
+	_lb6.put(tm, yz);
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 

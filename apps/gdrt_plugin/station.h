@@ -41,8 +41,8 @@ class Station : public Core::BaseObject {
 		Channel<std::int32_t> _lbt;
 		Channel<std::int32_t> _lbr;
 		Channel<std::int32_t> _lbc;
-		Channel<double> _lbe;
-		Channel<double> _lbn;
+		Channel<double> _lbx;
+		Channel<double> _lby;
 		Channel<double> _lbz;
 		Channel<double> _lb1;
 		Channel<double> _lb2;

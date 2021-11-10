@@ -56,9 +56,9 @@ Real-Time) UDP messages to Mini-SEED channels according to the following table:
 |       |                     | integer(2)     |                                       |                   |
 |       |                     | integer(2)     |                                       |                   |
 +-------+---------------------+----------------+---------------------------------------+-------------------+
-|  10   | Coordinate X        | double(%14.4f) | Coordinates X, Y, and Z in the Earth  |     LBE           |
+|  10   | Coordinate X        | double(%14.4f) | Coordinates X, Y, and Z in the Earth  |     LBX           |
 +-------+---------------------+----------------+ Centered Earth Fixed (ECEF)           +-------------------+
-|  11   | Coordinate Y        | double(%14.4f) | coordinate system in meters           |     LBN           |
+|  11   | Coordinate Y        | double(%14.4f) | coordinate system in meters           |     LBY           |
 +-------+---------------------+----------------+                                       +-------------------+
 |  12   | Coordinate Z        | double(%14.4f) |                                       |     LBZ           |
 +-------+---------------------+----------------+---------------------------------------+-------------------+
