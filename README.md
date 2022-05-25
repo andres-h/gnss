@@ -2,7 +2,8 @@
 
 This repository contains SeisComP GNSS applications.
 
-The repository cannot be built standalone. It needs to be integrated
+The repository is compatible with SeisComP 4.0 and later and
+cannot be built standalone. It needs to be integrated
 into the `seiscomp` build environment and checked out into
 `src/extras/gnss`.
 
