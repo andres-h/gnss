@@ -1,5 +1,10 @@
-The GDRT plugin is a SeedLink plugin that converts GDRT (GFZ Displacement
-Real-Time) UDP messages to Mini-SEED channels according to the following table:
+GDRT (GFZ Displacement Real-Time) is the data format of the Real-time Precise
+Point Positioning (RTPPP) provided by the Helmholtz Centre Potsdam – GFZ German
+Research Centre for Geosciences. This development was supported by the German
+Federal Ministry of Education and Research (BMBF) within the EWRICA project.
+
+The GDRT plugin is a SeedLink plugin that converts GDRT UDP messages to
+Mini-SEED channels according to the following table:
 
 +-------+---------------------+----------------+---------------------------------------+-------------------+
 | Index | Field name          | Format         | Description                           | Mini-SEED channel |
